@@ -1,3 +1,4 @@
+package MAIN;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -11,6 +12,7 @@ public class Inputs extends javax.swing.JPanel {
 	private SudokuUI board;
     private JPanel block;
     private JButton inputButton;
+	private JButton clear;
     public Inputs(SudokuUI board, JPanel block, JButton inButton, int numberOfInput) {
         this.board = board;
         this.block = block;
@@ -35,6 +37,7 @@ public class Inputs extends javax.swing.JPanel {
         seven = new javax.swing.JButton();
         eight = new javax.swing.JButton();
         nine = new javax.swing.JButton();
+        clear = new javax.swing.JButton();
 
         setLayout(new java.awt.GridLayout(3, 3));
 
@@ -154,6 +157,19 @@ public class Inputs extends javax.swing.JPanel {
             }
         });
         add(nine);
+        
+        clear.setBackground(new java.awt.Color(255, 255, 255));
+        clear.setText(" ");
+        clear.setAlignmentY(0.0F);
+        clear.setIconTextGap(1);
+        clear.setMargin(new java.awt.Insets(2, 2, 2, 2));
+        clear.setMinimumSize(new java.awt.Dimension(15, 15));
+        clear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                setAns(evt);
+            }
+        });
+        add(clear);
     }                       
     private void setAns(java.awt.event.ActionEvent evt){
         board.setInput(evt.getActionCommand(), block, inputButton);

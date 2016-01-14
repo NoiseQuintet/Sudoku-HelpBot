@@ -1,5 +1,8 @@
+package MAIN;
 import java.util.Arrays;
 import java.util.Random;
+
+
 
 public class Sudoku {
 
@@ -20,10 +23,12 @@ public class Sudoku {
     public static final int GAME_MODE_EASYER = 4;
     public static final int DEFAULT_TOLERANCE = 5;
     public static final String SET_VALUE_9X9 = "123456789";
+	private static final String SET_VALUE_6X6 = "123456";
    
-    private int[][] puzzle;
-    private Random random = new Random();
+	private int[][] puzzle;
+	private Random random = new Random();
 
+    
     // Tablica 2D
     private int[][] copyOf(int[][] original) {
         int[][] copy = new int[original.length][];
@@ -155,7 +160,7 @@ public class Sudoku {
     public boolean check(int[][] board) {
         boolean isCorrect = true;
         int numOfRowsInGrid = board.length == 9 ? 3 : 2;
-        final String setValues = board.length == 9 ? SET_VALUE_9X9 : SET_VALUE_6X6;
+        final String setValues = board.length == 9 ? SET_VALUE_9X9  : SET_VALUE_6X6;
        
         // Sprawdza rzedy
         for (int i = 0; i < board.length; i++) {

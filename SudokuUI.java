@@ -1,3 +1,4 @@
+package MAIN;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -64,7 +65,7 @@ public class SudokuUI extends javax.swing.JFrame {
         setTitle("Sudoku");
         setBounds(new java.awt.Rectangle(0, 0, 0, 0));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setMinimumSize(new java.awt.Dimension(500, 500));
+        setMinimumSize(new java.awt.Dimension(800, 800));
 
         base.setBackground(new java.awt.Color(0, 200, 0));
         base.setAlignmentX(0.0F);

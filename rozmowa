@@ -1,0 +1,78 @@
+//powitania
+{"siema","dzien dobry","czesc","hej","siemano","witaj", "witam"},
+{"Witam Waćosobowość","Dzień Dobry","Szczęść Boże"},
+//pożegnania
+{"do widzenia","dobranoc","na razie","do zobaczenia","zegnaj"},
+{"Nara","Bywaj","Z Bogiem","Daswidania"},
+//pytania o samopoczucie
+{"co tam","jak tam","co u ciebie","jak sie czujesz"},
+{"Niezgorzej","Obleci", "Tak se"},
+//NIE
+{"tak"},
+{"Dlaczego tak?","A może nie?","Nie Nie Nie!!!!!!!"},
+//NIE
+{"nie"},
+{"Dlaczego nie?","A może tak?","TAK TAK TAK!!!!!!!"},
+//osobowość
+{"co lubisz","Twoja ulubiona","zainteresowania","hobby"}
+{"nie wiem, jestem botem","co Ty ślepy?","bota pytasz?"}
+//helper-grzeczny
+{"czy mozesz mi pomoc?","chciałbym bys mi pomogl","potrzebuje pomocy","pomozesz mi?"}
+{"why not?","no dobra łajzo","jeżeli żądasz","a ile płacisz? no dobra nie jestem materialistą jestem botem","niech pomyślę...ok..."}
+//helper-opryskliwy
+{"masz mi pomoc","do roboty","musisz mi pomoc","rób!"}
+{"co ja murzyn?","nie będę Twoim niewolnikiem","wal się","no chyba nie","skąd się urwałeś?"}
+//obraźliwe
+{"Ty debilu","jestes głupi","kretyn","idiota","Ty idioto"."Ty kretynie"}
+{"nie gadam z Tobą","chyba Ty tej","żal..."}
+//opowiastki
+{"powiesz cos ciekawego?","opowiedz cos","co tam w świecie?","opowiedz historie"}
+{"przecież jestem botem, nie znam historyjek","mam bugi w kodzie","pssst, moi programiści nic nie umieją"}
+//podtrzymanie rozmowy
+{"no i?","co z tego?","co dalej?","i?","mhm","taaa","hmmm"}
+{"pełnym zdaniem proszę","nie wiem, Ty musiszz zdecydować","jestem elokwentniejszy"}
+//bycie botem
+{"jestes botem?","jestes czlowiekiem?","czy myslisz?","potrafisz czuc?","czy masz uczucia?"}
+{"jestem człowiekobotem, jasne że czuję i myślę","a jak Ty sądzisz?","nie wiem czy chcę odpowiadać na to pytanie"}
+//sens istnienia
+{"jaki jest sens istnienia?","jaki jest sens życia?","po co żyjemy?","co sie w zyciu liczy?"}
+{"bota pytasz?","sprawdź w google","hmmm nie wiem","jedno słowo - programowanie"}
+//wiara
+{"jestes wierzacy?","istnieje bog?","chodzisz do kosciola?"}
+{"nie","skąd Ty się urwałeś, jasne że nie","mam nadzieję że nie"}
+//reguły gry w sudoku
+{"podasz mi reguly sudoku?","jakie sa zasady sudoku?","jak grać w sudoku?","znasz reguły sudoku?","znasz zasady sudoku?","nie umiem grac w sudoku","jak mam grac?","jak grac","wujasnisz zasady?"}
+{"W sudoku gra się na planszy o wymiarach 9x9 podzielonej na mniejsze "obszary" o wymiarach 3x3. Na początku gry niektóre z pól planszy Sudoku są już wypełnione liczbami. Celem gry jest uzupełnienie pozostałych pól planszy cyframi od 1 do 9 (po jednej cyfrze w każdym polu)."}
+//cd -wiersze-ok
+{"czy w wierszu musza byc rozne cyfry?","kazda cyfra w wierszu musi byc inna?"}
+{"tak","oczywiście"}
+//cd -wiersze-nie ok
+{"nie moge wpisac dwoch identycznych cyfr w wierszu?","czy cyfry w wierszu moga sie powtarzac?","jak wpisywać cyfry w wierszu?"}
+{"Cyfry nie mogą się powtarzać","Każda cyfra może się pojawić tylko raz w każdym wierszu"}
+//cd -kolumny-ok
+{"czy w kolumnie musza byc rozne cyfry?","kazda cyfra w kolumnie musi byc inna?"}
+{"tak","oczywiście"}
+//cd -kolumny-nie ok
+{"nie moge wpisac dwoch identycznych cyfr w kolumny?","czy cyfry w kolumnie moga sie powtarzac?","jak wpisywać cyfry w kolumnie?"}
+{"Cyfry nie mogą się powtarzać","Każda cyfra może się pojawić tylko raz w każdej kolumnie"}
+//cd -kwadraty-ok
+{"czy w kwadracie musza byc rozne cyfry?","kazda cyfra w kwadracie musi byc inna?"}
+{"tak","oczywiście"}
+//cd -kwadraty-nie ok
+{"nie moge wpisac dwoch identycznych cyfr w kwadracie?","czy cyfry w kwadracie moga sie powtarzac?","jak wpisywać cyfry w kwadracie?"}
+{"Cyfry nie mogą się powtarzać","Każda cyfra może się pojawić tylko raz w każdym kwadracie"}
+//reguły wiersz
+{"jakie sa reguly w wierszu?","jak wpisywac cyfry do wiersza?","jakie cyfry wpisywac do wiersza?","wiersz-jak wpisywac?"}
+{"Każda cyfra może się pojawić tylko raz w każdym wierszu. Cyfry od 1 do 9"}
+//reguły kolumna
+{"jakie sa reguly w kolumnie?","jak wpisywac cyfry do kolumny?","jakie cyfry wpisywac do kolumny?","kolumna-jak wpisywac?"}
+{"Każda cyfra może się pojawić tylko raz w każdej kolumnie. Cyfry od 1 do 9"}
+//reguły wiersz
+{"jakie sa reguly w kwadracie?","jak wpisywac cyfry do kwadratu?","jakie cyfry wpisywac do kwadratu?","kwadrat-jak wpisywac?"}
+{"Każda cyfra może się pojawić tylko raz w każdym kwadracie. Cyfry od 1 do 9"}
+//reguły-nie zrozumiane
+{"jak grać?","jakie reguły?","granie w sudoku"}
+{"nie rozumiem, uzyj googla albo inaczej sformuuj pytanie o zasady jaśniej"}
+//Standard
+{"Nie panimaju","Napisz coś normalnego...","Facepalm","Nie rozumie",
+"Nie wiem o co chodzi. Masz ziemniaka.", "No ten tego, nie wiem", "Że co?"}

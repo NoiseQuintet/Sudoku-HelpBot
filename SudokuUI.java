@@ -1,415 +1,219 @@
 package MAIN;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.text.SimpleDateFormat;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+import java.util.Arrays;
+import java.util.Random;
 
-public class SudokuUI extends javax.swing.JFrame {
 
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private JButton[][] buttons;
-    private ActionListener[][] actionListener;
-    private JPanel[][] blocks;
-    private Sudoku sudoku;
-    private int gameMode;
-    private int grid;
-    private boolean paused;
-    private final StopWatch stopWatch;
 
-    /** Creates new form UI */
-    public SudokuUI() {
-        sudoku = new Sudoku();
-        gameMode = Sudoku.GAME_MODE_EASY;
-        grid = Sudoku.GRID_9X9;
-        stopWatch = new StopWatch();
-        paused = false;
-        initComponents();
-        initialize();
-        startTimer();
+public class Sudoku {
+
+    public static final int[][] VALID_BOARD_9X9 = {
+        {4, 3, 5, 8, 7, 6, 1, 2, 9},
+        {8, 7, 6, 2, 1, 9, 3, 4, 5},
+        {2, 1, 9, 4, 3, 5, 7, 8, 6},
+        {5, 2, 3, 6, 4, 7, 8, 9, 1},
+        {9, 8, 1, 5, 2, 3, 4, 6, 7},
+        {6, 4, 7, 9, 8, 1, 2, 5, 3},
+        {7, 5, 4, 1, 6, 8, 9, 3, 2},
+        {3, 9, 2, 7, 5, 4, 6, 1, 8},
+        {1, 6, 8, 3, 9, 2, 5, 7, 4}};
+    public static final int GRID_9X9 = 9;
+    public static final int GAME_MODE_EXPART = 75;
+    public static final int GAME_MODE_MEDIUM = 60;
+    public static final int GAME_MODE_EASY = 4;
+    public static final int GAME_MODE_EASYER = 4;
+    public static final int DEFAULT_TOLERANCE = 5;
+    public static final String SET_VALUE_9X9 = "123456789";
+	private static final String SET_VALUE_6X6 = "123456";
+   
+	private int[][] puzzle;
+	private Random random = new Random();
+
+    
+    // Tablica 2D
+    private int[][] copyOf(int[][] original) {
+        int[][] copy = new int[original.length][];
+        for (int i = 0; i < original.length; i++) {
+            copy[i] = Arrays.copyOf(original[i], original[i].length);
+        }
+        return copy;
     }
-                   
-    private void initComponents() {
 
-        base = new javax.swing.JPanel();
-        options = new javax.swing.JPanel();
-        newGameBut = new javax.swing.JButton();
-        resetGameBut = new javax.swing.JButton();
-        pause = new javax.swing.JButton();
-        timeLabel = new javax.swing.JLabel();
-        resume = new javax.swing.JButton();
-        submit = new javax.swing.JButton();
-        holder = new javax.swing.JPanel();
-        board = new javax.swing.JPanel();
-        menue = new javax.swing.JMenuBar();
-        new javax.swing.JMenu();
-        new javax.swing.JMenuItem();
-        new javax.swing.JMenuItem();
-        new javax.swing.JMenuItem();
-        new javax.swing.JPopupMenu.Separator();
-        new javax.swing.JMenuItem();
-        new javax.swing.JMenu();
-        new javax.swing.JRadioButtonMenuItem();
-        new javax.swing.JRadioButtonMenuItem();
-        new javax.swing.JRadioButtonMenuItem();
-        help = new javax.swing.JMenu();
-        about = new javax.swing.JMenuItem();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Sudoku");
-        setBounds(new java.awt.Rectangle(0, 0, 0, 0));
-        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setMinimumSize(new java.awt.Dimension(800, 800));
-
-        base.setBackground(new java.awt.Color(0, 200, 0));
-        base.setAlignmentX(0.0F);
-        base.setAlignmentY(0.0F);
-
-        options.setBackground(new java.awt.Color(255, 255, 255));
-
-        newGameBut.setBackground(new java.awt.Color(255, 255, 255));
-        newGameBut.setFont(new java.awt.Font("Tahoma", 0, 12));
-        newGameBut.setText("Nowa Gra");
-        newGameBut.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        newGameBut.setMaximumSize(new java.awt.Dimension(63, 19));
-        newGameBut.setMinimumSize(new java.awt.Dimension(63, 19));
-        newGameBut.setPreferredSize(new java.awt.Dimension(63, 19));
-        newGameBut.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                newGameButActionPerformed(evt);
-            }
-        });
-
-        resetGameBut.setBackground(new java.awt.Color(255, 255, 255));
-        resetGameBut.setFont(new java.awt.Font("Tahoma", 0, 12));
-        resetGameBut.setText("Reset");
-        resetGameBut.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        resetGameBut.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                resetGameButActionPerformed(evt);
-            }
-        });
-
-        pause.setBackground(new java.awt.Color(255, 255, 255));
-        pause.setFont(new java.awt.Font("Tahoma", 0, 12));
-        pause.setText("Pauza");
-        pause.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        pause.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pauseActionPerformed(evt);
-            }
-        });
-
-        timeLabel.setFont(new java.awt.Font("Tahoma", 0, 24));
-        timeLabel.setForeground(new java.awt.Color(51, 51, 51));
-        timeLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        timeLabel.setText("00:00:000");
-        timeLabel.setIconTextGap(0);
-
-        resume.setBackground(new java.awt.Color(255, 255, 255));
-        resume.setFont(new java.awt.Font("Tahoma", 0, 12));
-        resume.setText("Wznow");
-        resume.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        resume.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                resumeActionPerformed(evt);
-            }
-        });
-
-        submit.setBackground(new java.awt.Color(255, 255, 255));
-        submit.setFont(new java.awt.Font("Tahoma", 0, 12));
-        submit.setText("Zrobione");
-        submit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                submitActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout optionsLayout = new javax.swing.GroupLayout(options);
-        options.setLayout(optionsLayout);
-        optionsLayout.setHorizontalGroup(
-            optionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(optionsLayout.createSequentialGroup()
-                .addComponent(newGameBut, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(resetGameBut, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pause, javax.swing.GroupLayout.DEFAULT_SIZE, 66, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(resume, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(submit, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(timeLabel)
-                .addContainerGap())
-        );
-        optionsLayout.setVerticalGroup(
-            optionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(optionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(newGameBut, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
-                .addComponent(resetGameBut, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
-                .addComponent(pause, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
-                .addComponent(resume, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
-                .addComponent(submit, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(timeLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, Short.MAX_VALUE)
-        );
-
-        holder.setBackground(new java.awt.Color(255, 255, 255));
-        holder.setAlignmentX(0.0F);
-        holder.setAlignmentY(0.0F);
-        holder.setLayout(new java.awt.GridLayout(1, 1));
-
-        board.setBackground(new java.awt.Color(255, 255, 255));
-        board.setAlignmentX(0.0F);
-        board.setAlignmentY(0.0F);
-        board.setMinimumSize(new java.awt.Dimension(100, 100));
-        board.setPreferredSize(new java.awt.Dimension(100, 100));
-        board.setLayout(new java.awt.GridLayout(9, 9));
-        holder.add(board);
-
-        javax.swing.GroupLayout baseLayout = new javax.swing.GroupLayout(base);
-        base.setLayout(baseLayout);
-        baseLayout.setHorizontalGroup(
-            baseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, baseLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(baseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(holder, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 572, Short.MAX_VALUE)
-                    .addComponent(options, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        baseLayout.setVerticalGroup(
-            baseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(baseLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(options, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(holder, javax.swing.GroupLayout.DEFAULT_SIZE, 534, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-     
- 
-        help.setText("Pomoc");
-
-        about.setText("O programie");
-        about.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                aboutActionPerformed(evt);
-            }
-        });
-        help.add(about);
-
-        menue.add(help);
-
-        setJMenuBar(menue);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(base, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(base, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        pack();
+    // Odwraca rzedy w tablicy 2D
+    private int[][] swapRows(int[][] board, int row1, int row2) {
+        for (int j = 0; j < board.length; j++) {
+            int temp = board[row1][j];
+            board[row1][j] = board[row2][j];
+            board[row2][j] = temp;
+        }
+        return board;
     }
-    private void pauseActionPerformed(java.awt.event.ActionEvent evt) {                                      
-        stopWatch.pause();
-        paused = true;
-        showMessage("Paused");
-    }                                     
 
-    private void resumeActionPerformed(java.awt.event.ActionEvent evt) {                                       
-        stopWatch.resume();
-        paused = false;
-        holder.removeAll();
-        holder.add(board);
-        holder.repaint();
-        this.setVisible(true);
-    }                                      
+    // Odwraca kolumny w tablicy 2D
+    private int[][] swapCols(int[][] board, int col1, int col2) {
+        for (int i = 0; i < board.length; i++) {
+            int temp = board[i][col1];
+            board[i][col1] = board[i][col2];
+            board[i][col2] = temp;
+        }
+        return board;
+    }
 
-    private void resetGameButActionPerformed(java.awt.event.ActionEvent evt) {                                             
-        int[][] puzzle = sudoku.resetPuzzle();
-        createBoard(puzzle);
-    }                                            
+    private int[][] swapRowsAndCols(int[][] board) {
 
-    private void newGameButActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        int[][] puzzle = sudoku.getNewPuzzle(grid, gameMode);
-        createBoard(puzzle);
-    }                                          
+        int range = board.length == GRID_9X9 ? 7 : 5;
+       
+        int rowsInGrid = board.length == GRID_9X9 ? 3 : 2;
+      
+        int colsInGrid = 3;
 
-    private void submitActionPerformed(java.awt.event.ActionEvent evt) {                                       
-        if (!isAnsComplete()) {
-            JOptionPane.showMessageDialog(this, "Prosze, dokoncz odpowiedzi.");
+        for (int a = 0; a < range; a += rowsInGrid) {
+            int row[] = getTwoRanNum(a, rowsInGrid);
+            swapRows(board, row[0], row[1]);
+        }
+
+        for (int a = 0; a < range; a += colsInGrid) {
+            int[] col = getTwoRanNum(a, colsInGrid);
+            swapCols(board, col[0], col[1]);
+        }
+        return board;
+    }
+
+    private int[][] swapGrids(int[][] board) {
+        int firstgrid = 1 + random.nextInt(3);
+        int secondgrid = 1 + random.nextInt(3);
+        int numRowsInGrid = board.length == GRID_9X9 ? 3 : 2;
+
+        if ((firstgrid == 1 && secondgrid == 2) || (firstgrid == 2 && secondgrid == 1)) {
+            for (int i = 0; i < numRowsInGrid; i++) {
+                swapRows(board, i, i + numRowsInGrid);
+            }
+        } else if ((firstgrid == 2 && secondgrid == 3) || (firstgrid == 3 && secondgrid == 2)) {
+            for (int i = numRowsInGrid; i < numRowsInGrid * 2; i++) {
+                swapRows(board, i, i + numRowsInGrid);
+            }
+        } else if ((firstgrid == 1 && secondgrid == 3) || (firstgrid == 3 && secondgrid == 1)) {
+            for (int i = 0; i < numRowsInGrid; i++) {
+                swapRows(board, i, i + (numRowsInGrid * 2));
+            }
+        }
+        return board;
+    }
+
+    private int[][] swapNums(int[][] board) {
+        int[] num = getTwoRanNum(1, board.length);
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board.length; j++) {
+                if (board[i][j] == num[0]) {
+                    board[i][j] = num[1];
+                } else if (board[i][j] == num[1]) {
+                    board[i][j] = num[0];
+                }
+            }
+        }
+        return board;
+    }
+
+    private int[] getTwoRanNum(int min, int tolerance) {
+        int a[] = new int[2];
+        a[0] = min + random.nextInt(tolerance);
+        a[1] = min + random.nextInt(tolerance);
+        return a;
+    }
+
+    private int[][] createBoard(int[][] board) {
+        for (int i = 0; i < 10; i++) {
+            swapRowsAndCols(board);
+            swapGrids(board);
+            swapNums(board);
+        }
+        return board;
+    }
+
+    // Ukrywanie Cyferek
+    private int[][] createPuzzle(int[][] board, int mode) {
+        this.puzzle = copyOf(board);
+        int numOfEmptyBlock = getNumberOfEmptyBlock(board, mode);
+        for (int i = 0; i < numOfEmptyBlock; i++) {
+            int[] rowcol = getTwoRanNum(0, board.length);
+            this.puzzle[rowcol[0]][rowcol[1]] = 0;
+        }
+        return copyOf(this.puzzle);
+    }
+
+    // Ile ma ukryc cyferek
+    private int getNumberOfEmptyBlock(int[][] board, int mode) {
+        int numOfEmptyBlock = 0;
+        int numOfBlock = board.length * board[0].length;
+
+        if (GAME_MODE_EASYER <= mode && mode <= GAME_MODE_EXPART) {
+            numOfEmptyBlock = (int) Math.floor((mode * numOfBlock) / 100);
         } else {
-            stopWatch.stop();
-            boolean isAnsCorrect = sudoku.check(getAns());
-            String messageStr = "";
-            if (isAnsCorrect) {
-                messageStr = "Brawo! Wygrales w ciagu " + timeLabel.getText();
-            } else {
-                messageStr = "Niestety przegrales. ";
-            }
-            showMessage(messageStr);
+            numOfEmptyBlock = (int) Math.floor((GAME_MODE_MEDIUM * numOfBlock) / 100);
         }
-    }                                      
+        int tolerance = (int) Math.floor(((numOfBlock - numOfEmptyBlock) * 5) / 100);
+        numOfEmptyBlock += random.nextInt(tolerance + 1); // to avoid negetive 
 
-    private void aboutActionPerformed(java.awt.event.ActionEvent evt) {                                      
-        JOptionPane.showMessageDialog(this, "Wersja: 1.0\nAutor: Stefan Chmielnik");
-    }                                     
+        return numOfEmptyBlock;
+    }
 
-    private void createBoard(int[][] puzzle) {
-        board.removeAll();
-        grid = puzzle.length;
-        blocks = new JPanel[grid][grid];
-        buttons = new JButton[grid][grid];
-        actionListener = new ActionListener[grid][grid];
-        board.setLayout(new GridLayout(grid, grid, 3, 3));
-
-        int rowsInGrid = grid == 9 ? 3 : 2;
-
-        for (int i = 0; i < grid; i++) {
-            for (int j = 0; j < grid; j++) {
-                blocks[i][j] = new JPanel();
-                buttons[i][j] = new JButton();
-                String text = "";
-                if (0 < puzzle[i][j] && puzzle[i][j] <= grid) {
-                    text += puzzle[i][j];
-                } else {
-                    final JButton tempbutton = buttons[i][j];
-                    final JPanel tempBlock = blocks[i][j];
-                    actionListener[i][j] = new ActionListener() {
-
-                        public void actionPerformed(ActionEvent e) {
-                            viewInputs(tempBlock, tempbutton, grid);
-                        }
-                    };
-                    buttons[i][j].addActionListener(actionListener[i][j]);
-                }
-                buttons[i][j].setText(text);
-                buttons[i][j].setFont(new java.awt.Font("Tahoma", 0, 24));
-
-                if (((0 <= i && i < rowsInGrid) || (rowsInGrid * 2 <= i && i < grid)) && (3 <= j && j < 6)) {
-                    buttons[i][j].setBackground(new java.awt.Color(204, 204, 204));
-                } else if ((rowsInGrid <= i && i < rowsInGrid * 2) && ((0 <= j && j < 3) || (6 <= j && j < 9))) {
-                    buttons[i][j].setBackground(new java.awt.Color(204, 204, 204));
-                } else {
-                    buttons[i][j].setBackground(new java.awt.Color(255, 255, 255));
-                }
-                blocks[i][j].setLayout(new GridLayout(1, 1));
-                blocks[i][j].add(buttons[i][j]);
-                board.add(blocks[i][j]);
+    // Sprawdza odpowiedz
+    public boolean check(int[][] board) {
+        boolean isCorrect = true;
+        int numOfRowsInGrid = board.length == 9 ? 3 : 2;
+        final String setValues = board.length == 9 ? SET_VALUE_9X9  : SET_VALUE_6X6;
+       
+        // Sprawdza rzedy
+        for (int i = 0; i < board.length; i++) {
+            String set = setValues;
+            for (int j = 0; j < board.length; j++) {
+                set = set.replace("" + board[i][j], "");
+            }
+            if (!set.isEmpty()) {
+                isCorrect = false;
+                return isCorrect;
             }
         }
 
-        holder.removeAll();
-        holder.add(board);
-        board.repaint();
-        holder.repaint();
-        this.setVisible(true);
-        stopWatch.start();
-    }
-
-    private void initialize() {
-        int[][] puzzle = sudoku.getNewPuzzle(grid, gameMode);
-        createBoard(puzzle);
-    }
-
-    private void viewInputs(JPanel block, JButton inputButtton, int numOfInput) {
-        JPanel inputs = new Inputs(this, block, inputButtton, numOfInput);
-        block.remove(inputButtton);
-        block.add(inputs);
-        this.setVisible(true);
-    }
-
-    public void setInput(String ans, JPanel block, JButton inputButtton) {
-        block.removeAll();
-        inputButtton.setText(ans);
-        inputButtton.setFont(new java.awt.Font("Tahoma", 1, 24));
-        block.add(inputButtton);
-        this.repaint();
-    }
-
-    private int[][] getAns() {
-        int ans[][] = new int[grid][grid];
-
-        for (int i = 0; i < grid; i++) {
-            for (int j = 0; j < grid; j++) {
-                try {
-                    ans[i][j] = Integer.parseInt(buttons[i][j].getText());
-                } catch (NumberFormatException e) {
-                    ans[i][j] = 0;
-                }
+        // sprawdza kolumny
+        for (int j = 0; j < board.length; j++) {
+            String set = setValues;
+            for (int i = 0; i < board.length; i++) {
+                set = set.replace("" + board[i][j], "");
+            }
+            if (!set.isEmpty()) {
+                isCorrect = false;
+                return isCorrect;
             }
         }
 
-        return ans;
-    }
-
-    private boolean isAnsComplete() {
-        boolean isAnsComplete = true;
-        for (int i = 0; i < grid; i++) {
-            for (int j = 0; j < grid; j++) {
-                try {
-                    Integer.parseInt(buttons[i][j].getText());
-                } catch (NumberFormatException e) {
-                    isAnsComplete = false;
-                    break;
-                }
-            }
-        }
-        return isAnsComplete;
-    }
-
-    private void showMessage(String message) {
-        JLabel messageLabel = new JLabel();
-        messageLabel.setFont(new java.awt.Font("Tahoma", 1, 20));
-        messageLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        messageLabel.setText(message);
-        holder.removeAll();
-        holder.add(messageLabel);
-        holder.repaint();
-        this.setVisible(true);
-    }
-
-    private void startTimer() {
-        Thread thread = new Thread(new Runnable() {
-
-            public void run() {
-                stopWatch.start();
-                while (true) {
-                    if (!paused) {
-                        final String timeString = new SimpleDateFormat("mm:ss").format(stopWatch.getElapsedTime());
-                        timeLabel.setText("" + timeString);
+        
+        for (int hg = 0; hg < board.length; hg += numOfRowsInGrid) {
+            for (int vg = 0; vg < board[0].length; vg += 3) {
+                String set = setValues;
+                for (int i = hg; i < (hg + numOfRowsInGrid); i++) {
+                    for (int j = vg; j < vg + 3; j++) {
+                        set = set.replace("" + board[i][j], "");
                     }
                 }
+                if (!set.isEmpty()) {
+                    isCorrect = false;
+                    return isCorrect;
+                }
             }
-        });
-        thread.start();
+        }
+
+        return isCorrect;
     }
-                   
-    private javax.swing.JMenuItem about;
-    private javax.swing.JPanel base;
-    private javax.swing.JPanel board;
-    private javax.swing.JMenu help;
-    private javax.swing.JPanel holder;
-    private javax.swing.JMenuBar menue;
-    private javax.swing.JButton newGameBut;
-    private javax.swing.JPanel options;
-    private javax.swing.JButton pause;
-    private javax.swing.JButton resetGameBut;
-    private javax.swing.JButton resume;
-    private javax.swing.JButton submit;
-    private javax.swing.JLabel timeLabel;
-                    
+
+    public int[][] getNewPuzzle(int grid, int gameMode) {
+        if (grid == GRID_9X9) {
+            return createPuzzle(createBoard(VALID_BOARD_9X9), gameMode);
+        }
+
+        return createPuzzle(createBoard(VALID_BOARD_9X9), gameMode);
+    }
+
+    public int[][] resetPuzzle() {
+        return puzzle;
+    }
 }

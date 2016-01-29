@@ -67,7 +67,7 @@ public class ChatBot extends JFrame implements KeyListener{
 		{"co ja murzyn?","nie bêdê Twoim niewolnikiem","wal siê","no chyba nie","sk¹d siê urwa³eœ?"},
 		//obrazliwe
 		{"Ty debilu","jestes g³upi","kretyn","idiota","Ty idioto","Ty kretynie"},
-		{"nie gadam z Tob¹","chyba Ty tej","¿al..."},
+		{"nie gadam z Tob¹","chyba Ty tej","zal..."},
 		//opowiastki
 		{"powiesz cos ciekawego?","opowiedz cos","co tam w œwiecie?","opowiedz historie"},
 		{"przecie¿ jestem botem, nie znam historyjek","mam bugi w kodzie","pssst, moi programiœci nic nie umiej¹"},
@@ -78,7 +78,7 @@ public class ChatBot extends JFrame implements KeyListener{
 		{"jestes botem?","jestes czlowiekiem?","czy myslisz?","potrafisz czuc?","czy masz uczucia?"},
 		{"jestem cz³owiekobotem, jasne ¿e czujê i myœlê","a jak Ty s¹dzisz?","nie wiem czy chcê odpowiadaæ na to pytanie"},
 		//sens istnienia
-		{"sens zycia","jaki jest sens istnienia?","jaki jest sens ¿ycia?","po co ¿yjemy?","co sie w zyciu liczy?","jak zyc?"},
+		{"sens zycia","jaki jest sens istnienia?","jaki jest sens zycia?","po co ¿yjemy?","co sie w zyciu liczy?","jak zyc?"},
 		{"jedno s³owo - JAVA"},
 		//wiara
 		{"jestes wierzacy?","istnieje bog?","chodzisz do kosciola?"},
@@ -105,20 +105,20 @@ public class ChatBot extends JFrame implements KeyListener{
 		{"nie moge wpisac dwoch identycznych cyfr w kwadracie?","czy cyfry w kwadracie moga sie powtarzac?","jak wpisywaæ cyfry w kwadracie?"},
 		{"Cyfry nie mog¹ siê powtarzaæ","Ka¿da cyfra mo¿e siê pojawiæ tylko raz w ka¿dym kwadracie"},
 		//regu³y wiersz
-		{"jakie sa reguly w wierszu?","jak wpisywac cyfry do wiersza?","jakie cyfry wpisywac do wiersza?","wiersz-jak wpisywac?"},
-		{"Ka¿da cyfra mo¿e siê pojawiæ tylko raz w ka¿dym wierszu. Cyfry od 1 do 9"},
+		{"jakie sa reguly w wierszu?","wiersz?","jak wpisywac cyfry do wiersza?","jakie cyfry wpisywac do wiersza?","wiersz-jak wpisywac?"},
+		{"Kazda cyfra moze siê pojawiæ tylko raz w ka¿dym wierszu. Cyfry od 1 do 9"},
 		//regu³y kolumna
-		{"jakie sa reguly w kolumnie?","jak wpisywac cyfry do kolumny?","jakie cyfry wpisywac do kolumny?","kolumna-jak wpisywac?"},
+		{"jakie sa reguly w kolumnie?","kolumna?","jak wpisywac cyfry do kolumny?","jakie cyfry wpisywac do kolumny?","kolumna-jak wpisywac?"},
 		{"Ka¿da cyfra mo¿e siê pojawiæ tylko raz w ka¿dej kolumnie. Cyfry od 1 do 9"},
 		//regu³y wiersz
-		{"jakie sa reguly w kwadracie?","jak wpisywac cyfry do kwadratu?","jakie cyfry wpisywac do kwadratu?","kwadrat-jak wpisywac?"},
+		{"jakie sa reguly w kwadracie?","kwadrat","jak wpisywac cyfry do kwadratu?","jakie cyfry wpisywac do kwadratu?","kwadrat-jak wpisywac?"},
 		{"Ka¿da cyfra mo¿e siê pojawiæ tylko raz w ka¿dym kwadracie. Cyfry od 1 do 9"},
 		//regu³y-nie zrozumiane
 		{"jak graæ?"},
 		{"nie rozumiem, uzyj googla albo inaczej sformuuj pytanie o zasady jaœniej"},
 		//HELP
 		{"help", "pomoc", "pomó¿"},
-		{"zasady - wyœwietla ogólne zasady \n	podpowiedz - wyœwietla podpowiedŸ \n	cyfry w kwadracie/kolumnie/wierszu - wyœwietla podpowiedŸ na temat kwadratu/kolumny/wiersza \n	podpowiedz kwadrat/kolumne/wiersz - podpowiada naj³atwiejszy kwadrat/kolumne/wiersz"},
+		{"help - wyświetla pomoc (o nikt na to nie wpadł...) \n	zasady - wyœwietla ogólne zasady \n	podpowiedz - wyœwietla podpowiedŸ \n	cyfry w kwadracie/kolumnie/wierszu - wyœwietla podpowiedŸ na temat kwadratu/kolumny/wiersza \n	podpowiedz kwadrat/kolumne/wiersz - podpowiada naj³atwiejszy kwadrat/kolumne/wiersz \n	opowiedz cos \n	jaki jest sens zycia?	"},
 			
 		//Standard
 		{"Nie panimaju","Napisz coœ normalnego...","Facepalm","Nie rozumie",

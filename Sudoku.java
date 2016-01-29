@@ -19,7 +19,7 @@ public class Sudoku {
     public static final int GRID_9X9 = 9;
     public static final int GAME_MODE_EXPART = 75;
     public static final int GAME_MODE_MEDIUM = 60;
-    public static final int GAME_MODE_EASY = 50;
+    public static final int GAME_MODE_EASY = 4;
     public static final int GAME_MODE_EASYER = 4;
     public static final int DEFAULT_TOLERANCE = 5;
     public static final String SET_VALUE_9X9 = "123456789";
